@@ -1,0 +1,115 @@
+{
+  "name": "cunami",
+  "displayName": "cunami",
+  "description": "coder too for myself",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cunami.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "extension.optimizeCode",
+        "title": "Optimize Code"
+      },
+      {
+        "command": "extension.formatCode",
+        "title": "Format Code"
+      },
+      {
+        "command": "extension.addComments",
+        "title": "Add Comments"
+      },
+      {
+        "command": "extension.codeMaker",
+        "title": "付费代码工具人"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.optimizeCode",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.codeMaker",
+          "when": "editorTextFocus",
+          "group": "edit"
+        }
+      ]
+    },
+    "configuration":[
+      {
+        "title": "工具配置",
+        "properties": {
+          "cunami.model" :{
+            
+            "type" :"string",
+            "default" :"gpt-4o-mini",
+            "description": "要使用的模型"
+          },
+          "cunami.apiUrl" :{
+            
+            "type" :"string",
+            "default" :"https://api.openai-hk.com/v1/chat/completions",
+            "description": "api 地址"
+          },
+          "cunami.apikey" :{
+            
+            "type" :"string",
+            "default" :"gpt-4o-mini",
+            "description": "你的openai key"
+          },
+          "cunami.optimizeCodePrompt" : 
+          {
+            "type" : "string",
+            "default" : "请帮我优化以下代码${content}",
+            "description": "用于优化代码的提示词"
+          },
+          "cunami.formatCodePrompt" : 
+          {
+            "type" : "string",
+            "default" : "请帮我按照c++风格格式化以下代码${content}",
+            "description": "用于格式化代码的提示词"
+          },
+          "cunami.codeMakerPrompt" : 
+          {
+            "type" : "string",
+            "default" : "你是一个专业的程序员，请帮我按照需求生成函数代码。请不要返回除了代码以外的任何内容。如果没有指定语言，那么默认使用c++。如果没有指定语言，但是需求中包含了代码，请根据代码推测语言。请尽可能用我的语言写比较详细的注释，包括Doxygen风格的函数说明。不要使用markdown标签。需求如下：${content}",
+            "description": "用于自动生成代码"
+          }
+        }
+      }
+    ]
+
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.91.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0"
+  }
+}
